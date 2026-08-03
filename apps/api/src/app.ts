@@ -17,6 +17,12 @@ import { LOG_REDACT_PATHS } from "./modules/constants.js";
 import { InMemoryRateLimitStore } from "./modules/rate-limit.js";
 import { registerAuthRoutes } from "./modules/auth/routes.js";
 import { registerCandidatePortalRoutes } from "./modules/candidate/portal.js";
+import { registerCandidateRuntimeV2Routes } from "./modules/candidate/runtime-v2.js";
+import { registerV2FlagRoutes } from "./modules/v2/flags.js";
+import { registerAssessmentRuntimeRoutes } from "./modules/v2/runtime.js";
+import { registerCopilotRoutes } from "./modules/v2/copilot.js";
+import { registerToolBrokerRoutes } from "./modules/v2/tool-broker.js";
+import { registerReviewV2Routes } from "./modules/v2/review.js";
 import { registerAcknowledgementRoutes } from "./modules/org/acknowledgements.js";
 import {
   registerAiGatewayRoutes,
@@ -293,6 +299,12 @@ export function buildApp(options: BuildAppOptions = {}): FastifyInstance {
     registerSubscriptionRoutes(app);
     registerHiringRoutes(app);
     registerCandidatePortalRoutes(app);
+    registerCandidateRuntimeV2Routes(app);
+    registerV2FlagRoutes(app);
+    registerAssessmentRuntimeRoutes(app);
+    registerCopilotRoutes(app);
+    registerToolBrokerRoutes(app);
+    registerReviewV2Routes(app);
     registerReviewRoutes(app);
     registerOrgViewsRoutes(app);
     registerDataRightsRoutes(app);

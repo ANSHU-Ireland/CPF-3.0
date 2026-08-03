@@ -16,31 +16,31 @@
   "stages": [
     {
       "stage": "1. Orient | 10 min",
-      "durationMinutes": null,
+      "durationMinutes": 10,
       "candidateAction": "Restate intended behaviour, identify system boundaries and define the review plan.",
       "evidenceCaptured": "Review scope, risks and acceptance map."
     },
     {
       "stage": "2. Inspect | 25 min",
-      "durationMinutes": null,
+      "durationMinutes": 25,
       "candidateAction": "Trace changed paths, contracts, permissions, concurrency and failure behaviour.",
       "evidenceCaptured": "Annotated diff and evidence references."
     },
     {
       "stage": "3. Challenge | 20 min",
-      "durationMinutes": null,
+      "durationMinutes": 20,
       "candidateAction": "Create tests or checks that attempt to disprove the pull request's apparent correctness.",
       "evidenceCaptured": "Adversarial tests and discovered defects."
     },
     {
       "stage": "4. Correct | 20 min",
-      "durationMinutes": null,
+      "durationMinutes": 20,
       "candidateAction": "Fix blocking defects narrowly and validate the corrected behaviour.",
       "evidenceCaptured": "Patch, tests and correction rationale."
     },
     {
       "stage": "5. Decide | 15 min",
-      "durationMinutes": null,
+      "durationMinutes": 15,
       "candidateAction": "Classify remaining issues and make a conditional release recommendation with owners.",
       "evidenceCaptured": "Review summary, confidence and escalation."
     }

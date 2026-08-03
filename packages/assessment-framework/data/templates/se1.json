@@ -16,31 +16,31 @@
   "stages": [
     {
       "stage": "1. Frame | 15 min",
-      "durationMinutes": null,
+      "durationMinutes": 15,
       "candidateAction": "Clarify the user outcome, define acceptance criteria, surface unknowns and sequence the work.",
       "evidenceCaptured": "Questions, assumptions, task breakdown and risk ranking."
     },
     {
       "stage": "2. Inspect | 20 min",
-      "durationMinutes": null,
+      "durationMinutes": 20,
       "candidateAction": "Trace the relevant request, permission, data and UI paths before changing code.",
       "evidenceCaptured": "Repository navigation, architecture notes and contextual evidence."
     },
     {
       "stage": "3. Build | 45 min",
-      "durationMinutes": null,
+      "durationMinutes": 45,
       "candidateAction": "Implement the smallest complete change and use AI only where it improves speed without obscuring understanding.",
       "evidenceCaptured": "Code diff, prompt trace and tool choices."
     },
     {
       "stage": "4. Verify | 25 min",
-      "durationMinutes": null,
+      "durationMinutes": 25,
       "candidateAction": "Test happy path, failure path, permissions, audit behaviour and regression risk.",
       "evidenceCaptured": "Test outputs, manual checks and corrected defects."
     },
     {
       "stage": "5. Handover | 15 min",
-      "durationMinutes": null,
+      "durationMinutes": 15,
       "candidateAction": "Explain trade offs, residual risk, release controls, rollback and questions for the team.",
       "evidenceCaptured": "Decision note, release plan and escalation points."
     }

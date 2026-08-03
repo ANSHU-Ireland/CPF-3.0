@@ -18,7 +18,9 @@
   "dependencies": {
     "@cpf/ai-gateway": "*",
     "@cpf/assessment-framework": "*",
+    "@cpf/assessment-packs": "*",
     "@cpf/identity": "*",
+    "@cpf/v2-contracts": "*",
     "fastify": "^5.2.0",
     "nodemailer": "^9.0.3",
     "pg": "^8.13.1",

@@ -1,0 +1,32 @@
+# Current status + evidence pointers only (requirements live in nodes/*.md).
+version: 1
+baseline:
+  commit: 46b3b473ee0860d540f3050235b7f725036a5a07
+  branch: main
+  node: v24.11.1
+  npm: 11.6.2
+  migration_head_at_baseline: 0026_candidate_runtime_proctor_logs.sql
+  captured_at: "2026-08-03"
+states:
+  S01: { status: complete, evidence: [evidence/s01-baseline.md] }
+  S02: { status: complete, evidence: [evidence/s02-flags.md] }
+  S03: { status: complete, evidence: [../compliance/v2-classification-record.md, ../compliance/v2-dpia-scope.md] }
+  S04: { status: complete, evidence: [evidence/s04-design-system.md] }
+  S05: { status: complete, evidence: [evidence/s05-contracts.md] }
+  S06: { status: complete, evidence: [evidence/s06-storage.md] }
+  S07: { status: complete, evidence: [evidence/s07-packs.md] }
+  S08: { status: complete, evidence: [evidence/s08-runtime.md] }
+  S09: { status: complete, evidence: [evidence/s09-copilot.md] }
+  S10: { status: complete, evidence: [evidence/s10-plugins.md] }
+  S11: { status: complete, evidence: [evidence/s11-candidate-entry.md] }
+  S12: { status: complete, evidence: [evidence/s12-preflight.md] }
+  S13: { status: complete, evidence: [evidence/s13-workspaces.md] }
+  S14: { status: complete, evidence: [evidence/s14-finalisation.md] }
+  S15: { status: in_progress, evidence: [evidence/s15-companion.md] } # protocol+scaffold done; signing/pen-test pending
+  S16: { status: complete, evidence: [evidence/s16-reviewer-queue.md] }
+  S17: { status: complete, evidence: [evidence/s17-evidence-review.md] }
+  S18: { status: in_progress, evidence: [evidence/s18-hardening.md] } # code gates done; external pen test pending
+  S19: { status: blocked, evidence: [evidence/s19-pilot-plan.md] } # needs real shadow sessions + human reviewers
+  S20: { status: blocked, evidence: [] } # gated on S19 pilot outcomes
+updated_at: "2026-08-03"
+updated_by: coding-agent

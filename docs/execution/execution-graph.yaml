@@ -1,0 +1,65 @@
+# Dependency source of truth for CPF V2 execution (plan §2).
+# Statuses live in project-state.yaml — not here.
+version: 1
+critical_path: [S01, S02, S03, S05, S06, S08, S09, S10, S13, S14, S16, S17, S18, S19, S20]
+nodes:
+  - id: S01
+    title: Baseline and execution memory
+    depends_on: []
+  - id: S02
+    title: Feature flags and V2 route seams
+    depends_on: [S01]
+  - id: S03
+    title: Governance, classification, DPIA scope
+    depends_on: [S02]
+  - id: S04
+    title: Design system
+    depends_on: [S03]
+  - id: S05
+    title: V2 domain, API, event and manifest contracts
+    depends_on: [S03]
+  - id: S06
+    title: V2 storage, RLS, retention
+    depends_on: [S05]
+  - id: S07
+    title: Four signed assessment packs
+    depends_on: [S05]
+  - id: S08
+    title: Assessment runtime and artifact engine
+    depends_on: [S06, S07]
+  - id: S09
+    title: Controlled assessment copilot (AI gateway)
+    depends_on: [S08]
+  - id: S10
+    title: Sandbox plugin broker and catalogue
+    depends_on: [S08]
+  - id: S11
+    title: Candidate entry, notices, accommodations
+    depends_on: [S04, S06]
+  - id: S12
+    title: Preflight, installer handoff, tutorial
+    depends_on: [S11]
+  - id: S13
+    title: Live candidate role workspaces
+    depends_on: [S09, S10, S12]
+  - id: S14
+    title: Review-before-submit, atomic finalisation, recovery
+    depends_on: [S13]
+  - id: S15
+    title: Signed proctor companion
+    depends_on: [S12, S14]
+  - id: S16
+    title: Reviewer V2 queue, assignment, calibration
+    depends_on: [S04, S14]
+  - id: S17
+    title: Evidence review, adjudication, appeal
+    depends_on: [S16]
+  - id: S18
+    title: Cross-system hardening
+    depends_on: [S15, S17]
+  - id: S19
+    title: Shadow-mode UAT and validation
+    depends_on: [S18]
+  - id: S20
+    title: Controlled rollout and post-market monitoring
+    depends_on: [S19]

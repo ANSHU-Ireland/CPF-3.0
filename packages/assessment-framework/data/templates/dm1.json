@@ -16,31 +16,31 @@
   "stages": [
     {
       "stage": "1. Frame | 15 min",
-      "durationMinutes": null,
+      "durationMinutes": 15,
       "candidateAction": "Define the commercial objective, decision horizon, guardrails and key ambiguities.",
       "evidenceCaptured": "Success metric hierarchy and questions."
     },
     {
       "stage": "2. Reconcile | 30 min",
-      "durationMinutes": null,
+      "durationMinutes": 30,
       "candidateAction": "Map spend to clicks, landing behaviour, tracked conversions, qualified leads and revenue.",
       "evidenceCaptured": "Funnel reconciliation and data quality evidence."
     },
     {
       "stage": "3. Diagnose | 25 min",
-      "durationMinutes": null,
+      "durationMinutes": 25,
       "candidateAction": "Rank tracking, mix, audience, creative, landing and sales follow up hypotheses.",
       "evidenceCaptured": "Evidence by hypothesis and confidence."
     },
     {
       "stage": "4. Act | 30 min",
-      "durationMinutes": null,
+      "durationMinutes": 30,
       "candidateAction": "Protect budget and design controlled changes with expected outcome and stopping rules.",
       "evidenceCaptured": "Budget plan, experiments and forecast assumptions."
     },
     {
       "stage": "5. Communicate | 20 min",
-      "durationMinutes": null,
+      "durationMinutes": 20,
       "candidateAction": "Explain findings, uncertainty and next decisions to marketing and finance stakeholders.",
       "evidenceCaptured": "Decision memo and dashboard specification."
     }

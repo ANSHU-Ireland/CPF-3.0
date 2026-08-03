@@ -27,6 +27,9 @@ export const CANDIDATE_SUBMITTABLE_CATEGORIES = new Set([
 ]);
 
 export const MAX_EVENT_PAYLOAD_BYTES = 32 * 1024;
+export const V2_RUNTIME_BATCH_MAX_EVENTS = 100;
+export const V2_RUNTIME_EVENT_PAYLOAD_MAX_BYTES = 16 * 1024;
+export const V2_RUNTIME_QUERY_MAX_EVENTS = 1_000;
 export const INVITATION_TTL_DAYS = 14;
 export const ACTIVATION_TTL_HOURS = 72;
 export const DSR_DUE_DAYS = 30;

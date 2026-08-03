@@ -11,6 +11,7 @@ import { invitationIssuedTemplate } from "../notifications/templates.js";
 import { enqueueOutboundMessage } from "../notifications/queue.js";
 import { parseCsvLine, splitCsvLines, neutraliseCsvFormula } from "./csv.js";
 import { runIdempotent, IdempotencyConflictError } from "../idempotency.js";
+import { resolveOrgFlags } from "../v2/flags.js";
 
 const CreateJobProfileSchema = z.object({
   title: z.string().min(2).max(200),
@@ -345,12 +346,16 @@ export function registerHiringRoutes(app: FastifyInstance): void {
           const token = generateToken();
           // Domain machine: draft --send--> sent (issued immediately on creation).
           const status = invitationMachine.next(invitationMachine.initial, "send");
+          // S02 (ADR-001): the experience version is decided server-side at issue
+          // time from the org's candidate_v2 flag and is immutable afterwards.
+          const flags = await resolveOrgFlags(client, orgId);
+          const experienceVersion = flags.candidate_v2 ? "v2" : "v1";
           const invitation = await client.query<{ id: string; expires_at: Date }>(
             `INSERT INTO invitations
-               (organisation_id, candidate_id, job_profile_id, template_version_id, status, token_hash, expires_at, sent_at)
-             VALUES ($1, $2, $3, $4, $5, $6, now() + ($7 || ' days')::interval, now())
+               (organisation_id, candidate_id, job_profile_id, template_version_id, status, token_hash, expires_at, sent_at, experience_version)
+             VALUES ($1, $2, $3, $4, $5, $6, now() + ($7 || ' days')::interval, now(), $8)
              RETURNING id, expires_at`,
-            [orgId, candidateId, jobProfileId, version.rows[0].id, status, hashToken(token), String(INVITATION_TTL_DAYS)],
+            [orgId, candidateId, jobProfileId, version.rows[0].id, status, hashToken(token), String(INVITATION_TTL_DAYS), experienceVersion],
           );
           const invitationId = invitation.rows[0]!.id;
           await client.query(
@@ -385,6 +390,7 @@ export function registerHiringRoutes(app: FastifyInstance): void {
               invitationId,
               candidateAccessToken: token,
               expiresAt: invitation.rows[0]!.expires_at,
+              experienceVersion,
               note: "Deliver the access token to the candidate out of band. It is shown only once.",
             },
           };
@@ -495,3 +501,4 @@ export function registerHiringRoutes(app: FastifyInstance): void {
     },
   );
 }
+

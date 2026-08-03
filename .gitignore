@@ -15,6 +15,7 @@ dist/
 
 # Throwaway local PostgreSQL instance for integration testing
 .tmp-pg/
+.local-postgres/
 
 # Test & coverage output
 coverage/

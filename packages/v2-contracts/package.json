@@ -1,0 +1,29 @@
+{
+  "name": "@cpf/v2-contracts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "CPF V2 immutable domain/API/event/manifest contracts (S05). Zod source of truth; versioned; unknown fields rejected at security-sensitive boundaries; UTC everywhere.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^4.1.10"
+  }
+}

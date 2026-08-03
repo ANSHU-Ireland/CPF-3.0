@@ -1,0 +1,29 @@
+{
+  "name": "@cpf/proctor-protocol",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CPF proctor companion protocol (S15): typed bridge messages, heartbeat/hash-chain helpers, and the verified self-termination sequence. No biometric, emotion or gaze capability exists in this protocol.",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2",
+    "vitest": "^4.1.10"
+  }
+}

@@ -1,4 +1,4 @@
-import { StrictMode, useEffect, useState, type ReactNode } from "react";
+import { StrictMode, Suspense, lazy, useEffect, useState, type ReactNode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Link, Navigate, Route, Routes } from "react-router";
 import { AuthProvider, useAuth } from "./auth.js";
@@ -16,11 +16,11 @@ import { DataRightsPage } from "./pages/DataRightsPage.js";
 import { CompliancePage } from "./pages/CompliancePage.js";
 import { AnalyticsPage } from "./pages/AnalyticsPage.js";
 import { PlatformAnalyticsPage } from "./pages/PlatformAnalyticsPage.js";
-import { ReviewQueuePage } from "./pages/ReviewQueuePage.js";
-import { ReviewWorkspacePage } from "./pages/ReviewWorkspacePage.js";
 import { EvidenceProfilePage } from "./pages/EvidenceProfilePage.js";
 import { CandidateEntryPage } from "./pages/CandidateEntryPage.js";
 import { CandidatePortalPage } from "./pages/CandidatePortalPage.js";
+import { ReviewQueuePage } from "./pages/ReviewQueuePage.js";
+import { ReviewWorkspacePage } from "./pages/ReviewWorkspacePage.js";
 import { LearningAdminPage } from "./pages/LearningAdminPage.js";
 import { CourseBuilderPage } from "./pages/CourseBuilderPage.js";
 import { PathwaysPage } from "./pages/PathwaysPage.js";
@@ -34,6 +34,18 @@ import { InsightsDashboardPage } from "./pages/InsightsDashboardPage.js";
 import { TransparencyPage } from "./pages/TransparencyPage.js";
 import { WorkflowInsightsPage } from "./pages/WorkflowInsightsPage.js";
 import "./styles.css";
+
+// S02 (ADR-001): V2 surfaces are route-level lazy chunks so they add zero
+// bytes to V1/employer/platform bundles. V1 routes above stay untouched.
+const CandidateV2Entry = lazy(() =>
+  import("./features/candidate-v2/entry/CandidateV2EntryPage.js").then((m) => ({ default: m.CandidateV2EntryPage })),
+);
+const ReviewerV2Queue = lazy(() =>
+  import("./features/reviewer-v2/queue/ReviewerV2QueuePage.js").then((m) => ({ default: m.ReviewerV2QueuePage })),
+);
+const ReviewerV2Workspace = lazy(() =>
+  import("./features/reviewer-v2/workspace/ReviewerV2WorkspacePage.js").then((m) => ({ default: m.ReviewerV2WorkspacePage })),
+);
 
 /** Root ("/") redirects to sign-in or a role-appropriate landing page. */
 function RootRedirect(): ReactNode {
@@ -85,6 +97,14 @@ function AppRoutes(): ReactNode {
       <Route path={routes.login()} element={<LoginPage />} />
       <Route path={routes.candidateEntry()} element={<CandidateEntryPage />} />
       <Route path="/candidate/:token" element={<CandidatePortalPage />} />
+      <Route
+        path="/candidate-v2/:token"
+        element={
+          <Suspense fallback={<Loading label="Loading assessment…" />}>
+            <CandidateV2Entry />
+          </Suspense>
+        }
+      />
       <Route element={<Shell />}>
         <Route path={routes.platformOrgs()} element={<PlatformOrgsPage />} />
         <Route path={routes.platformAnalytics()} element={<PlatformAnalyticsPage />} />
@@ -98,6 +118,22 @@ function AppRoutes(): ReactNode {
         <Route path={routes.orgAnalytics(":orgId")} element={<AnalyticsPage />} />
         <Route path="/org/:orgId/reviews" element={<ReviewQueuePage />} />
         <Route path="/org/:orgId/reviews/:reviewId" element={<ReviewWorkspacePage />} />
+        <Route
+          path="/org/:orgId/reviews-v2"
+          element={
+            <Suspense fallback={<Loading label="Loading review queue…" />}>
+              <ReviewerV2Queue />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/org/:orgId/reviews-v2/:reviewId"
+          element={
+            <Suspense fallback={<Loading label="Loading review…" />}>
+              <ReviewerV2Workspace />
+            </Suspense>
+          }
+        />
         <Route path="/org/:orgId/sessions/:sessionId/profile" element={<EvidenceProfilePage />} />
         <Route path={routes.orgLearningHome(":orgId")} element={<LearnerHomePage />} />
         <Route path={routes.orgLearningAdmin(":orgId")} element={<LearningAdminPage />} />

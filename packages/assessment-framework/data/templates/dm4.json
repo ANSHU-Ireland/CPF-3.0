@@ -16,31 +16,31 @@
   "stages": [
     {
       "stage": "1. Define | 15 min",
-      "durationMinutes": null,
+      "durationMinutes": 15,
       "candidateAction": "Clarify the decision, unit economics, time horizon and metric definitions.",
       "evidenceCaptured": "Decision question and metric contract."
     },
     {
       "stage": "2. Audit | 30 min",
-      "durationMinutes": null,
+      "durationMinutes": 30,
       "candidateAction": "Check schema, dates, currency, attribution windows, identity, duplicates, missingness and consent changes.",
       "evidenceCaptured": "Data quality log and severity."
     },
     {
       "stage": "3. Reconcile | 30 min",
-      "durationMinutes": null,
+      "durationMinutes": 30,
       "candidateAction": "Build a traceable funnel from spend through qualified pipeline and realised revenue.",
       "evidenceCaptured": "Transformation trail and exceptions."
     },
     {
       "stage": "4. Interpret | 25 min",
-      "durationMinutes": null,
+      "durationMinutes": 25,
       "candidateAction": "Compare attribution views, lag and margin sensitivity before recommending investment.",
       "evidenceCaptured": "Ranges, assumptions and decision logic."
     },
     {
       "stage": "5. Communicate | 20 min",
-      "durationMinutes": null,
+      "durationMinutes": 20,
       "candidateAction": "Present what is known, uncertain and required next to marketing and finance.",
       "evidenceCaptured": "Executive recommendation and measurement backlog."
     }

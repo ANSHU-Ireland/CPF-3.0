@@ -239,6 +239,21 @@ const ROUTE_TABLE: RouteSpec[] = [
   { method: "POST", path: "/v1/orgs/:orgId/workflow-insights/generate", roles: ["org_admin"] },
   { method: "POST", path: "/v1/orgs/:orgId/workflow-insights/proposals/:proposalId/approve", roles: ["org_admin"] },
   { method: "POST", path: "/v1/orgs/:orgId/workflow-insights/proposals/:proposalId/dismiss", roles: ["org_admin"] },
+  // S02 — V2 feature flags (read: any org member; writes are platform-admin routes, not org-scoped).
+  {
+    method: "GET",
+    path: "/v1/orgs/:orgId/feature-flags",
+    roles: ["org_admin", "hiring_manager", "reviewer", "learning_admin", "support_agent"],
+  },
+  // S16/S17 — Reviewer V2 (queue/bundle: reviewer+admin; assignment/adjudication/appeals/integrity: admin).
+  { method: "GET", path: "/v2/orgs/:orgId/reviews/queue", roles: ["reviewer", "org_admin"] },
+  { method: "POST", path: "/v2/orgs/:orgId/reviews/:sessionId/assign", roles: ["org_admin"] },
+  { method: "GET", path: "/v2/orgs/:orgId/reviews/:sessionId", roles: ["reviewer", "org_admin"] },
+  { method: "PUT", path: "/v2/orgs/:orgId/reviews/:sessionId/dimensions/:dimensionId", roles: ["reviewer", "org_admin"] },
+  { method: "POST", path: "/v2/orgs/:orgId/reviews/:sessionId/finalise", roles: ["reviewer", "org_admin"] },
+  { method: "GET", path: "/v2/orgs/:orgId/reviews/:sessionId/integrity", roles: ["org_admin"] },
+  { method: "POST", path: "/v2/orgs/:orgId/reviews/:sessionId/adjudications/close", roles: ["org_admin"] },
+  { method: "POST", path: "/v2/orgs/:orgId/reviews/:sessionId/appeals", roles: ["org_admin"] },
 ];
 
 function resolvePath(spec: RouteSpec, orgId: string): string {
@@ -386,7 +401,8 @@ run("CPF authorization matrix (CPF-47)", () => {
 
     const liveOrgRoutes = new Set<string>();
     for (const [path, methods] of Object.entries(spec.paths)) {
-      if (!path.startsWith("/v1/orgs/{orgId}")) continue;
+      // Org-scoped surfaces: V1 and the S16/S17 V2 review routes.
+      if (!path.startsWith("/v1/orgs/{orgId}") && !path.startsWith("/v2/orgs/{orgId}")) continue;
       for (const method of Object.keys(methods)) {
         if (method.toUpperCase() === "HEAD") continue; // Fastify auto-adds HEAD for every GET
         liveOrgRoutes.add(`${method.toUpperCase()} ${path}`);

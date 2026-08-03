@@ -12,5 +12,11 @@ export default defineConfig({
     // strictly sequential file execution so this workspace's suite is
     // deterministic regardless of runner core count.
     fileParallelism: false,
+    // Fixture setup does real argon2 hashing + multi-step provisioning against
+    // a live Postgres; the vitest default of 5s flakes on slower dev machines.
+    // Raising the ceiling changes no product behaviour — CI stays green either
+    // way, local runs stop reporting spurious timeout failures.
+    testTimeout: 30_000,
+    hookTimeout: 120_000,
   },
 });

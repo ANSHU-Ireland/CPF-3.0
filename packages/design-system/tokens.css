@@ -1,0 +1,104 @@
+/*
+ * CPF V2 design tokens (S04). Semantic custom properties only — product code
+ * never hard-codes raw colours/spacing outside approved exceptions.
+ * Brand attributes: calm, precise, humane, authoritative, efficient.
+ * No purple "AI" gradients, no glass effects, no decorative surveillance
+ * graphics, no colour-only status.
+ */
+:root {
+  /* Colour */
+  --cpf-canvas: #f7f8fa;
+  --cpf-surface: #ffffff;
+  --cpf-text: #172033;
+  --cpf-text-secondary: #526071;
+  --cpf-border: #d9dee7;
+  --cpf-primary: #2355d8;
+  --cpf-primary-hover: #1c46b5;
+  --cpf-focus: #7aa2ff;
+  --cpf-success-bg: #e8f5ec;
+  --cpf-success-fg: #176339;
+  --cpf-warning-bg: #fdf3e1;
+  --cpf-warning-fg: #7a4d05;
+  --cpf-danger-bg: #fdecec;
+  --cpf-danger-fg: #8f1d1d;
+  --cpf-info-bg: #e9effc;
+  --cpf-info-fg: #1c3f9e;
+  --cpf-neutral-bg: #eef1f5;
+  --cpf-neutral-fg: #3f4c5e;
+
+  /* Type */
+  --cpf-font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --cpf-font-mono: ui-monospace, "Cascadia Code", "SF Mono", Menlo, monospace;
+  --cpf-text-xs: 0.75rem;
+  --cpf-text-sm: 0.875rem;
+  --cpf-text-md: 1rem;
+  --cpf-text-lg: 1.125rem;
+  --cpf-text-xl: 1.375rem;
+  --cpf-text-2xl: 1.75rem;
+  --cpf-leading: 1.6;
+
+  /* Spacing (4px base) */
+  --cpf-space-1: 4px;
+  --cpf-space-2: 8px;
+  --cpf-space-3: 12px;
+  --cpf-space-4: 16px;
+  --cpf-space-5: 24px;
+  --cpf-space-6: 32px;
+  --cpf-space-7: 48px;
+  --cpf-space-8: 64px;
+
+  /* Radius / border / elevation */
+  --cpf-radius-sm: 4px;
+  --cpf-radius-md: 8px;
+  --cpf-radius-lg: 12px;
+  --cpf-border-w: 1px;
+  --cpf-shadow-1: 0 1px 2px rgba(23, 32, 51, 0.06);
+  --cpf-shadow-2: 0 4px 12px rgba(23, 32, 51, 0.1);
+  --cpf-shadow-3: 0 12px 32px rgba(23, 32, 51, 0.16);
+
+  /* Motion (honour prefers-reduced-motion) */
+  --cpf-motion-fast: 120ms ease-out;
+  --cpf-motion-base: 200ms ease-out;
+
+  /* Z-index scale */
+  --cpf-z-nav: 100;
+  --cpf-z-drawer: 700;
+  --cpf-z-dialog: 800;
+  --cpf-z-toast: 900;
+
+  /* Layout */
+  --cpf-bp-sm: 640px;
+  --cpf-bp-md: 960px;
+  --cpf-bp-lg: 1280px;
+  --cpf-bp-xl: 1440px;
+  --cpf-content-narrow: 680px; /* candidate service flow 640–720px */
+  --cpf-content-wide: 1200px;
+  --cpf-target-min: 24px; /* WCAG 2.2 target size minimum */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --cpf-motion-fast: 0ms;
+    --cpf-motion-base: 0ms;
+  }
+}
+
+/* Base focus treatment: always visible, never removed. */
+.cpf-root :focus-visible,
+[data-cpf-root] :focus-visible {
+  outline: 2px solid var(--cpf-focus);
+  outline-offset: 2px;
+}
+
+/* Screen-reader-only content (used by Timer, Stepper, form labels). */
+.cpf-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}

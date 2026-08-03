@@ -12,11 +12,12 @@
     "apps/*"
   ],
   "scripts": {
-    "build": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway && npm run build -w @cpf/api",
-    "test": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway && npm run test --workspaces --if-present",
-    "typecheck": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway && npm run typecheck --workspaces --if-present",
+    "build": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway -w @cpf/design-system -w @cpf/v2-contracts -w @cpf/assessment-packs && npm run build -w @cpf/api",
+    "test": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway -w @cpf/design-system -w @cpf/v2-contracts -w @cpf/assessment-packs && npm run test --workspaces --if-present",
+    "typecheck": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway -w @cpf/design-system -w @cpf/v2-contracts -w @cpf/assessment-packs && npm run typecheck --workspaces --if-present",
     "lint": "npm run lint --workspaces --if-present",
     "seed:generate": "node packages/db/scripts/generate-seed.mjs",
-    "api:dev": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway && npm run dev --workspace @cpf/api"
+    "db:migrate": "node scripts/db/apply-migrations.mjs",
+    "api:dev": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway -w @cpf/v2-contracts -w @cpf/assessment-packs && npm run dev --workspace @cpf/api"
   }
 }
