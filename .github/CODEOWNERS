@@ -1,0 +1,27 @@
+# CPF 3.0 — Code ownership & application-boundary enforcement
+#
+# Established in module M02. This file routes review and encodes the ownership
+# rules in docs/architecture/application-boundaries.md. Each role-scoped web app
+# is owned distinctly so that Candidate/Reviewer/Admin concerns cannot silently
+# leak across application boundaries.
+#
+# Replace @ANSHU-Ireland with the appropriate GitHub team/user handles.
+
+# Default owner for everything.
+*                           @ANSHU-Ireland
+
+# Admin web (Super Admin + Employer Admin) — the ONLY home for admin modules.
+/apps/admin-web/            @ANSHU-Ireland
+
+# Candidate web — the ONLY home for candidate modules.
+/apps/candidate-web/        @ANSHU-Ireland
+
+# Reviewer web — the ONLY home for reviewer modules.
+/apps/reviewer-web/         @ANSHU-Ireland
+
+# Legacy V1 web — FROZEN. No new role features. Changes require explicit review.
+/apps/web/                  @ANSHU-Ireland
+
+# Architecture & recovery governance.
+/docs/architecture/         @ANSHU-Ireland
+/docs/execution/recovery/   @ANSHU-Ireland

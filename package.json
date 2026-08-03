@@ -18,6 +18,21 @@
     "lint": "npm run lint --workspaces --if-present",
     "seed:generate": "node packages/db/scripts/generate-seed.mjs",
     "db:migrate": "node scripts/db/apply-migrations.mjs",
-    "api:dev": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway -w @cpf/v2-contracts -w @cpf/assessment-packs && npm run dev --workspace @cpf/api"
+    "api:dev": "npm run build -w @cpf/assessment-framework -w @cpf/identity -w @cpf/ai-gateway -w @cpf/v2-contracts -w @cpf/assessment-packs && npm run dev --workspace @cpf/api",
+    "admin:dev": "npm run dev -w @cpf/admin-web",
+    "admin:build": "npm run build -w @cpf/admin-web",
+    "admin:typecheck": "npm run typecheck -w @cpf/admin-web",
+    "admin:test": "npm run test -w @cpf/admin-web",
+    "candidate:dev": "npm run dev -w @cpf/candidate-web",
+    "candidate:build": "npm run build -w @cpf/candidate-web",
+    "candidate:typecheck": "npm run typecheck -w @cpf/candidate-web",
+    "candidate:test": "npm run test -w @cpf/candidate-web",
+    "reviewer:dev": "npm run dev -w @cpf/reviewer-web",
+    "reviewer:build": "npm run build -w @cpf/reviewer-web",
+    "reviewer:typecheck": "npm run typecheck -w @cpf/reviewer-web",
+    "reviewer:test": "npm run test -w @cpf/reviewer-web",
+    "legacy:dev": "npm run dev -w @cpf/web",
+    "legacy:build": "npm run build -w @cpf/web",
+    "legacy:test": "npm run test -w @cpf/web"
   }
 }

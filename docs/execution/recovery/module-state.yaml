@@ -1,0 +1,82 @@
+# Module state ledger
+
+status values: not_started | in_progress | blocked | implemented | verified
+
+```yaml
+modules:
+  M01_repository_recovery:
+    status: implemented
+    notes: >-
+      Broken-state list verified against commit a322ffd. Recovery ledger scaffolded.
+      Local recovery branch created (no push). Baseline verification COMPLETE and
+      recorded in test-evidence.md: typecheck PASS, packaged build PASS, web tests
+      105/105 PASS. Honest gaps recorded (full DB tests, lint, project/ not run).
+      Not marked `verified` because full `npm test` (DB suites) and lint were not
+      executed in this pass.
+  M02_monorepo_boundaries:
+    status: implemented
+    depends_on: [M01]
+    notes: >-
+      project/ integrated into root workspaces and (per D-006) MOVED to
+      apps/admin-web/ so all four web apps live under apps/* consistently; the
+      package name stays @cpf/admin-web.
+      Unused Supabase dependency removed (verified: no imports in project/src).
+      project/package-lock.json deleted; single root lockfile regenerated (one
+      `npm install` resolves all web apps, no ERESOLVE). @cpf/admin-web aligned to
+      React 19 toolchain (react 19.2, @types/react 19, TS 5.7, lucide-react 0.469
+      for React 19 peer; react-router-dom kept at 6.30 which supports React 19).
+      New independent apps scaffolded: apps/candidate-web (@cpf/candidate-web, :5174,
+      → M07) and apps/reviewer-web (@cpf/reviewer-web, :5175, → M09), each with real
+      Vite+React19+TS build, typecheck, and a passing Vitest test. Root per-app
+      scripts added (admin:*, candidate:*, reviewer:*, legacy:*). Ownership rules
+      added: .github/CODEOWNERS + docs/architecture/application-boundaries.md, and a
+      legacy warning in apps/web/README.md. Verification: full workspace typecheck
+      PASS (now includes admin-web + both new apps + legacy web + api); admin/
+      candidate/reviewer production builds PASS; candidate+reviewer unit tests PASS
+      (1+1); legacy web 105/105 tests PASS. DEFERRED to M14 (see D-004): renaming
+      @cpf/web→@cpf/legacy-web and removing embedded Candidate V2 / Reviewer V2 route
+      registrations from apps/web/src/main.tsx — their replacements do not exist yet
+      (M07/M09) and a live demo depends on them; removing now would break the
+      candidate experience with no replacement. Not marked `verified`: full `npm
+      test` (DB suites) and workspace-wide lint not run; legacy vitest run exits 1
+      due to a heap OOM at worker teardown (all 105 assertions pass).
+  M03_shared_contracts_design_system:
+    status: not_started
+    depends_on: [M02]
+  M04_admin_backend_auth:
+    status: not_started
+    depends_on: [M03]
+  M05_admin_frontend:
+    status: not_started
+    depends_on: [M04]
+  M06_candidate_v2_backend:
+    status: not_started
+    depends_on: [M03]
+    notes: B-001 resolved (blueprint present); unblocked for content, not yet implemented.
+  M07_candidate_frontend:
+    status: not_started
+    depends_on: [M06]
+    notes: B-001 resolved (blueprint present); unblocked for content, not yet implemented.
+  M08_reviewer_v2_backend:
+    status: not_started
+    depends_on: [M03]
+  M09_reviewer_frontend:
+    status: not_started
+    depends_on: [M08]
+  M10_ai_copilot_plugin_sandbox:
+    status: not_started
+    depends_on: [M06, M07]
+    notes: B-001 resolved (blueprint defines copilot/tool boundaries); not yet implemented.
+  M11_proctor_companion:
+    status: not_started
+    depends_on: [M06, M07]
+  M12_security_privacy_accessibility:
+    status: not_started
+    depends_on: [M05, M07, M09, M10, M11]
+  M13_integration_ci_observability:
+    status: not_started
+    depends_on: [M12]
+  M14_pilot_cutover_legacy_retirement:
+    status: not_started
+    depends_on: [M13]
+```

@@ -1,0 +1,29 @@
+{
+  "name": "@cpf/reviewer-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "CPF Reviewer web application. Ownership boundary: the employer reviewer workspace only. This is the sole home for Reviewer modules — no reviewer feature may live in @cpf/admin-web (apps/admin-web/) or @cpf/web (apps/web). Full implementation lands in M09.",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -p tsconfig.json && vite build",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router": "^8.3.0"
+  },
+  "devDependencies": {
+    "@testing-library/react": "^16.1.0",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^4.3.4",
+    "happy-dom": "^20.11.1",
+    "typescript": "^5.7.2",
+    "vite": "^6.4.3",
+    "vitest": "^4.1.10"
+  }
+}
